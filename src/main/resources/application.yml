@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: jwt
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/jwtPractice}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:1234}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      format_sql: true
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  security:
+      secret: ${JWT_SECRET}
+      time:
+        access_token: 840000
+        refresh_token: 8400000
