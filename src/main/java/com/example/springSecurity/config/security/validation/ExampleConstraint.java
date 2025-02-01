@@ -8,6 +8,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE_USE;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.ConstraintTarget;
 import jakarta.validation.Payload;
 import jakarta.validation.constraintvalidation.SupportedValidationTarget;
 import jakarta.validation.constraintvalidation.ValidationTarget;
@@ -24,12 +25,12 @@ import java.lang.annotation.Target;
 public @interface ExampleConstraint {
 
     //필수 요소
-    String message() default "{com.example.springSecurity.config.security.validation.ExampleConstraint}";
+    String message() default "{com.example.springSecurity.config.security.validation.ExampleConstraint.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
     //추가 요소
-    ValidationTarget validationAppliesTo() default ValidationTarget.ANNOTATED_ELEMENT;
+    ConstraintTarget validationAppliesTo() default ConstraintTarget.IMPLICIT;
 
     String test() default "test";
 }

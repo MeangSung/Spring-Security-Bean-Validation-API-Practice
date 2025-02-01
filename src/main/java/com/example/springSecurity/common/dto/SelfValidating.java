@@ -26,7 +26,7 @@ public abstract class SelfValidating<T> {
     }
 
     public void validateSelf() {
-        Set<ConstraintViolation<T>> violations = validator.validate((T) this);
+        Set<ConstraintViolation<T>> violations = validator.validate((T) this); // 전체 유효성 검증 수행 로직
         if(!violations.isEmpty()) {
             log.error("Validation error occured: {}", violations);
             throw new CommonException(ErrorCode.INTERNAL_DATA_ERROR);

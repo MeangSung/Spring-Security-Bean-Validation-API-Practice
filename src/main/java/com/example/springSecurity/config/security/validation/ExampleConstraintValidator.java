@@ -8,6 +8,6 @@ public class ExampleConstraintValidator implements ConstraintValidator<ExampleCo
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         //검증 로직
-        return true;
+        return s != null;
     }
 }
