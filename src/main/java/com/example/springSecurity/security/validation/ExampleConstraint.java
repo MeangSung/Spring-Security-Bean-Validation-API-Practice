@@ -1,4 +1,4 @@
-package com.example.springSecurity.config.security.validation;
+package com.example.springSecurity.security.validation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
