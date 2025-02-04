@@ -1,7 +1,7 @@
 package com.example.springSecurity.user.ui;
 
 import com.example.springSecurity.common.dto.ResponseDto;
-import com.example.springSecurity.config.security.validation.ExampleConstraint;
+import com.example.springSecurity.security.validation.ExampleConstraint;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
