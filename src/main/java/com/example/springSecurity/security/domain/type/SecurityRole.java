@@ -1,9 +1,10 @@
-package com.example.springSecurity.config.security.domain.type;
+package com.example.springSecurity.security.domain.type;
 
-import com.example.springSecurity.common.exception.CommonException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Getter
 public enum SecurityRole {
 
     OWNER("관리자", "OWNER", "ROLE_OWNER"),

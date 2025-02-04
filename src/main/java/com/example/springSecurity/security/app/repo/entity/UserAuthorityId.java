@@ -1,4 +1,4 @@
-package com.example.springSecurity.auth.repo.entity;
+package com.example.springSecurity.security.app.repo.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

@@ -8,25 +8,19 @@ public class Constants {
     public static String ACCOUNT_ID_ATTRIBUTE_NAME = "email";
     public static String ACCOUNT_ROLE_CLAIM_NAME = "rol";
 
+    //Header
+    public static String AUTHORIZATION_HEADER = "Authorization";
+    public static String BEARER_PREFIX = "Bearer ";
+
     /**
      * 인증이 필요 없는 url
      */
     public static List<String> NO_NEED_AUTH_URLS = List.of(
             // Authentication/Authorization
-            "/auth/validations/**",
-            "/auth/reissue/token",
-            "/auth/reissue/authentication-code",
-            "/auth/sign-up",
-            "/auth/login",
-            "/auth/users",
-            "/auth/owners",
-
-            // Term
-            "/terms/**",
-
-            // Guest
-            "/guests/**",
-
+            "/login",
+            "/api/auth/register",
+            "/api/auth/login",
+            "/api/auth/validate/**",
             // Swagger
             "/api-docs.html",
             "/api-docs/**",
@@ -35,4 +29,8 @@ public class Constants {
 
             "/test-osrm"
     );
+
+    public static final List<String> USER_URLS = List.of(
+    "/api/**"
+            );
 }
