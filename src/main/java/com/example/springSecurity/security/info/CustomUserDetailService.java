@@ -1,4 +1,4 @@
-package com.example.springSecurity.config.security.info;
+package com.example.springSecurity.security.info;
 
 import com.example.springSecurity.user.repo.UserRepository;
 import com.example.springSecurity.user.repo.entity.User;
@@ -15,9 +15,9 @@ public class CustomUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User entity = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User entity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
         return CustomUserDetail.create(entity);
     }
 }
