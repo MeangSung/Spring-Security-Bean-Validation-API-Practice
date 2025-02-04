@@ -4,10 +4,10 @@ import static com.example.springSecurity.common.exception.ErrorCode.EXPIRED_TOKE
 import static com.example.springSecurity.common.exception.ErrorCode.INVALID_TOKEN_ERROR;
 import static com.example.springSecurity.common.exception.ErrorCode.TOKEN_UNSUPPORTED_ERROR;
 
-import com.example.springSecurity.common.constant.JwtConstants;
+import com.example.springSecurity.common.constant.Constants;
 import com.example.springSecurity.common.exception.CommonException;
-import com.example.springSecurity.config.security.app.dto.response.DefaultJsonWebTokenDto;
-import com.example.springSecurity.config.security.domain.type.SecurityRole;
+import com.example.springSecurity.security.app.dto.DefaultJsonWebTokenDto;
+import com.example.springSecurity.security.domain.type.SecurityRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -16,23 +16,18 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import javax.crypto.SecretKey;
-import lombok.Getter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JasonWebTokenUtil implements InitializingBean {
+public class JsonWebTokenUtil implements InitializingBean {
 
     @Value("${spring.security.secret}")
     private String secret;
 
     @Value("${spring.security.time.access_token}")
     private Long accessTokenValidityTime;
-
-    @Getter
-    @Value("${spring.security.time.refresh_token}")
-    private Long refreshTokenValidityTime;
 
     private SecretKey key;
 
@@ -42,10 +37,9 @@ public class JasonWebTokenUtil implements InitializingBean {
         key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public DefaultJsonWebTokenDto generateDefaultJsonWebTokenDto(String identify, SecurityRole role) {
+    public DefaultJsonWebTokenDto generateDefaultJsonWebTokenDto(String identify, String role) {
         String accessToken = generateToken(identify,role,accessTokenValidityTime);
-        String refreshToken = generateToken(identify,null,refreshTokenValidityTime);
-        return new DefaultJsonWebTokenDto(accessToken, refreshToken);
+        return new DefaultJsonWebTokenDto(accessToken);
     }
 
     public Claims validateToken(String token) {
@@ -65,11 +59,11 @@ public class JasonWebTokenUtil implements InitializingBean {
     }
 
 
-    private String generateToken(String identify, SecurityRole role, Long expiredPeriod) {
-        Claims claims = Jwts.claims().build();
-
-        claims.put(JwtConstants.ACCOUNT_ID_ATTRIBUTE_NAME, identify);
-        if(role != null) claims.put(JwtConstants.ACCOUNT_ROLE_CLAIM_NAME, role.name());
+    private String generateToken(String identify, String role, Long expiredPeriod) {
+        Claims claims = Jwts.claims()
+                .add(Constants.ACCOUNT_ID_ATTRIBUTE_NAME, identify)
+                .add(Constants.ACCOUNT_ROLE_CLAIM_NAME, role)
+                .build();
 
         return Jwts.builder()
                 .claims(claims)
