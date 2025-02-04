@@ -1,5 +1,7 @@
-package com.example.springSecurity.common.exception;
+package com.example.springSecurity.common.dto;
 
+import com.example.springSecurity.common.exception.ErrorCode;
+import com.example.springSecurity.security.app.dto.ExceptionDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import java.util.HashMap;
@@ -7,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import practice.fundingboost2.common.dto.ExceptionDto;
 
 @Getter
 public class ArgumentNotValidExceptionDto extends ExceptionDto {
@@ -16,7 +17,7 @@ public class ArgumentNotValidExceptionDto extends ExceptionDto {
 
   public ArgumentNotValidExceptionDto(
       final MethodArgumentNotValidException methodArgumentNotValidException) {
-    super(ErrorCode.INVALID_ARGUMENT);
+    super(ErrorCode.INVALID_ARGUMENT.getCode(),ErrorCode.INVALID_ARGUMENT.getMessage());
 
     this.errorFields = new HashMap<>();
     methodArgumentNotValidException
@@ -27,7 +28,7 @@ public class ArgumentNotValidExceptionDto extends ExceptionDto {
 
   public ArgumentNotValidExceptionDto(
       final ConstraintViolationException constraintViolationException) {
-    super(ErrorCode.INVALID_ARGUMENT);
+    super(ErrorCode.INVALID_ARGUMENT.getCode(), ErrorCode.INVALID_ARGUMENT.getMessage());
 
     this.errorFields = new HashMap<>();
 
