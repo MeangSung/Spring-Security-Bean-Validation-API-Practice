@@ -1,4 +1,4 @@
-package com.example.springSecurity.config.web;
+package com.example.springSecurity.security.config;
 
 import java.util.List;
 import org.springframework.context.annotation.Bean;
