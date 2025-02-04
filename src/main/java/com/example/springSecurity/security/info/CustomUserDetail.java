@@ -1,6 +1,6 @@
-package com.example.springSecurity.config.security.info;
+package com.example.springSecurity.security.info;
 
-import com.example.springSecurity.config.security.domain.type.SecurityRole;
+import com.example.springSecurity.security.domain.type.SecurityRole;
 import com.example.springSecurity.user.repo.entity.User;
 import java.util.Collection;
 import java.util.List;
@@ -14,11 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @RequiredArgsConstructor
 public class CustomUserDetail implements UserDetails {
 
-    private final String email;
+    @Getter private final String email;
+    @Getter private final String role;
     private final String password;
-    private final SecurityRole role;
 
-    @Getter
     private final String nickname;
 
     public static CustomUserDetail create(User user){
@@ -26,7 +25,7 @@ public class CustomUserDetail implements UserDetails {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .nickname(user.getNickname())
-                .role(user.getSecurityRole())
+                .role(user.getRole())
                 .build();
     };
 
@@ -37,7 +36,7 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return nickname;
     }
 
     @Override
