@@ -60,8 +60,8 @@ public class JsonWebTokenAuthenticationFilter extends OncePerRequestFilter {
         //SecurityContext 에 AuthenticationToken 저장
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-//        SecurityContext context = SecurityContextHolder.getContext();
+//        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(authenticationToken);
         SecurityContextHolder.setContext(context);
 
