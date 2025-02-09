@@ -8,8 +8,9 @@ import com.example.springSecurity.common.handler.DefaultLoginSuccessHandler;
 import com.example.springSecurity.common.handler.DefaultLogoutProcessHandler;
 import com.example.springSecurity.common.handler.DefaultLogoutSuccessHandler;
 import com.example.springSecurity.common.constant.Constants;
+import com.example.springSecurity.common.handler.OAuth2SuccessHandler;
 import com.example.springSecurity.common.utility.JsonWebTokenUtil;
-import com.example.springSecurity.security.info.CustomUserDetailService;
+import com.example.springSecurity.security.info.CustomOAuth2UserService;
 import com.example.springSecurity.security.filter.JsonWebTokenAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +41,9 @@ public class SecurityConfig {
     private final DefaultAccessDeniedHandler defaultAccessDeniedHandler;
     private final DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint;
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+
     private final JsonWebTokenUtil jsonWebTokenUtil;
 
     private final UserDetailsService userDetailsService;
@@ -68,6 +72,11 @@ public class SecurityConfig {
 //                        .requestMatchers(Constants.USER_URLS.toArray(String[]::new)).hasAnyAuthority("USER","OWNER") DB에 Role과 정확이 이름이 같아야한다.
                         .anyRequest().authenticated())
 
+                .oauth2Login(configurer ->
+                                configurer
+                                    .userInfoEndpoint(c -> c.userService(customOAuth2UserService))
+                                    .successHandler(oAuth2SuccessHandler)
+                        )
 
                 .formLogin(configurer -> configurer
                         .loginPage("/login")

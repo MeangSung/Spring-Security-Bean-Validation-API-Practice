@@ -26,6 +26,10 @@ public class Constants {
             "/api-docs/**",
             "/swagger-ui/**",
             "/v3/**",
+            //OAuth
+            "/login/oauth2/code/kakao",
+            "/api/auth/oauth2/authorize",
+            "/oauth2/authorization/kakao",
 
             "/test-osrm"
     );

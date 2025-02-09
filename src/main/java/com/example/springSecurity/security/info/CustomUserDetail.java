@@ -1,6 +1,5 @@
 package com.example.springSecurity.security.info;
 
-import com.example.springSecurity.security.domain.type.SecurityRole;
 import com.example.springSecurity.user.repo.entity.User;
 import java.util.Collection;
 import java.util.List;
