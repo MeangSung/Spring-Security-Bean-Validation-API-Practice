@@ -49,6 +49,9 @@ public enum ErrorCode {
   LACK_ITEM_QUANTITY(40017, HttpStatus.BAD_REQUEST, "아이템 수량이 부족합니다."),
   ALREADY_WRITTEN_REVIEW(40018, HttpStatus.BAD_REQUEST, "이미 리뷰를 작성했습니다."),
 
+  //oauth
+  ILLEGAL_REGISTRATION_ID(40019, HttpStatus.BAD_REQUEST, "서버에 등록된 RegistraionId가 아닙니다"),
+
   // Gone Error
   GONE_SHARED_URL(41001, HttpStatus.GONE, "해당 공유 URL이 만료되었습니다."),
 
